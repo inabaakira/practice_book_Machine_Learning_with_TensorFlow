@@ -2,13 +2,14 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: linear.py
 #    Created:       <2019/05/03 12:33:58>
-#    Last Modified: <2019/05/04 13:21:05>
+#    Last Modified: <2019/05/04 17:05:54>
 
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
 
-x_label0 = np.random.normal(5, 1, 10)
+# x_label0 = np.random.normal(5, 1, 10)
+x_label0 = np.append(np.random.normal(5, 1, 9), 20)
 x_label1 = np.random.normal(2, 1, 10)
 xs = np.append(x_label0, x_label1)
 labels = [0.] * len(x_label0) + [1.] * len(x_label1)
