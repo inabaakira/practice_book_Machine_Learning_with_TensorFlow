@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: linear.py
 #    Created:       <2019/05/03 12:33:58>
-#    Last Modified: <2019/05/04 13:12:14>
+#    Last Modified: <2019/05/04 13:13:04>
 
 import tensorflow as tf
 import numpy as np
@@ -31,3 +31,22 @@ y_model = model(X, w)
 cost = tf.reduce_sum(tf.square(Y - y_model))
 
 train_op = tf.train.GradientDescentOptimizer(learning_rate).minimize(cost)
+
+sess = tf.Session()
+init = tf.global_variables_initializer()
+sess.run(init)
+
+for epoch in range(training_epochs):
+    sess.run(train_op, feed_dict={X: xs, Y: labels})
+    current_cost = sess.run(cost, feed_dict={X: xs, Y: labels})
+    if epoch % 100 == 0:
+        print(epoch, current_cost)
+
+w_val = sess.run(w)
+print('learned parameters', w_val)
+
+sess.close()
+
+all_xs = np.linspace(0, 10, 100)
+plt.plot(all_xs, all_xs * w_val[1] + w_val[0])
+plt.show()
