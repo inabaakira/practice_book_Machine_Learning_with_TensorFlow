@@ -2,7 +2,7 @@
 #-*- mode: python; coding: utf-8 -*-
 # file: linear.py
 #    Created:       <2019/05/03 12:33:58>
-#    Last Modified: <2019/05/04 13:13:04>
+#    Last Modified: <2019/05/04 13:21:05>
 
 import tensorflow as tf
 import numpy as np
@@ -44,6 +44,11 @@ for epoch in range(training_epochs):
 
 w_val = sess.run(w)
 print('learned parameters', w_val)
+
+correct_prediction = tf.equal(Y, tf.to_float(tf.greater(y_model, 0.5)))
+accuracy = tf.reduce_mean(tf.to_float(correct_prediction))
+
+print('accuracy', sess.run(accuracy, feed_dict={X: xs, Y: labels}))
 
 sess.close()
 
